@@ -12,7 +12,7 @@ const theme = {
   },
   fonts: ['Lato', 'sans-serif'],
   fontSizes: {
-    small: '1em',
+    small: '0.6em',
     medium: '2em',
     large: '3em',
   }, 

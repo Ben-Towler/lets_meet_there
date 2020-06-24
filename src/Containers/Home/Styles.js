@@ -4,7 +4,8 @@ export const Wrapper = styled.section`
 `;
 
 export const Hero = styled.section`
-  background-color: #006EEB;
+  background-color: orange;
+  
 `;
 
 export const Title = styled.section`

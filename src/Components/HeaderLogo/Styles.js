@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledHeaderLogo = styled.img`
-  height: 35px;
-  width: 48px;
-  margin: 10px
+  height: 45px;
+  width: 58px;
+  margin: 20px
 `
