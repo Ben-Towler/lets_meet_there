@@ -7,8 +7,8 @@ const theme = {
     navyBlue: '#0D3C51',
     gothicGrey: '#6E8A97',
     gullGrey: '#9EB1B9',
-    smokeWhite: '#F8F8F8'
-
+    whiteSmoke: '#F8F8F8',
+    white: '#FFF'
   },
   fonts: ['Lato', 'sans-serif'],
   fontSizes: {
@@ -17,7 +17,7 @@ const theme = {
     medium: '1.6em',
     large: '2em',
   }, 
-  borders: '3px', 
+  borders: '3px',
   flexboxgrid: {
     'gridSize': 12,
     'gutterWidth': 1,

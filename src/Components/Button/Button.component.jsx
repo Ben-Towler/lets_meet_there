@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { StyledButton } from './Styles'
 
 function Button ({children, ...props}) {

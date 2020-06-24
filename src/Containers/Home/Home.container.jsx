@@ -38,10 +38,12 @@ export default function HomePage({currentUser}) {
   return (
     <Wrapper>
       <Hero>
+        
         <TitleWrapper>
           <SubTitle>PLAN THE PERFECT TRIP TOGETHER</SubTitle>
           <Title>Search for a place to <span style={style}>meet</span></Title>
         </TitleWrapper>
+
         <SearchForm
           searchFlights={searchFlights}
           getPlace={getPlace}

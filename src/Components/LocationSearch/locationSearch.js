@@ -41,7 +41,7 @@ export default function LocationSearch({ onChange, name, field }) {
   );
 
   return (
-    <div>
+    <div className='locationSearch-container'>
       <PlacesAutocomplete
         value={location}
         name={name}
@@ -57,3 +57,4 @@ export default function LocationSearch({ onChange, name, field }) {
     </div>
   )
 };
+

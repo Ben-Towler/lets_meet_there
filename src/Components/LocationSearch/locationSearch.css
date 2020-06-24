@@ -4,3 +4,23 @@
   font-size: 80%;
   padding: 0.25em 0.7em;
 }
+
+.locationSearch-container {
+  /* background-color: lightblue; */
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+}
+
+.autocomplete-root {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-control {
+  background-color: #F8F8F8;
+  border: none;
+  font-size: 1.3em;
+  font-family: Lato;
+  outline: none;
+}

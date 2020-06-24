@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { StyledForm, } from './Styles';
+import { StyledForm, StyledDateWrapper, BluePlaneTakeOff } from './Styles';
 import { Button } from 'Components';
 import moment from 'moment';
 import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import LocationSearch from '../LocationSearch/locationSearch';
+
 
 function Form (props) {
   const [focus, setFocus] = useState(null);
@@ -78,26 +79,31 @@ function Form (props) {
     <StyledForm data-testid="form" onSubmit={(e) => handleSubmit(e)}>
       {props.hasError ? 'Error' : null}
 
+      <BluePlaneTakeOff size='48' color='#5FDAE3'/>
+      
       {renderFields(props.fields)}
 
-      {props.showDateRange ?
-        <DateRangePicker
-          startDate={formDates.startDate}
-          startDateId="startDate"
-          endDate={formDates.endDate} 
-          endDateId="endDate"
-          onDatesChange={
-            function ({ startDate, endDate }) {
-              setFormDates({ startDate, endDate })
+      <StyledDateWrapper>
+        {props.showDateRange ?
+          <DateRangePicker
+            startDate={formDates.startDate}
+            startDateId="startDate"
+            endDate={formDates.endDate} 
+            endDateId="endDate"
+            onDatesChange={
+              function ({ startDate, endDate }) {
+                setFormDates({ startDate, endDate })
+              }
             }
-          }
-          showClearDates={true}
-          focusedInput={focus}
-          onFocusChange={(focus) => {
-            setFocus(focus);
-          }}
-        /> : null
-      }
+            showClearDates={true}
+            focusedInput={focus}
+            onFocusChange={(focus) => {
+              setFocus(focus);
+            }}
+          /> : null
+        }
+      </StyledDateWrapper>
+
 
       <Button type="submit">Submit</Button>
     </StyledForm>

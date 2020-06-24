@@ -1,4 +1,11 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+
+export const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  color: inherit;
+  cursor: default;
+`
 
 export const StyledSiteHeader = styled.header`
   background-color: #fff;
