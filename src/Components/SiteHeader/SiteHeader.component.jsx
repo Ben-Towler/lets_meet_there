@@ -3,11 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { Button } from 'Components';
 import { StyledSiteHeader } from './Styles.js';
 import { signInWithGoogle, auth } from '../../Services/firebase.utils';
-
+import HeaderLogo from 'Components/HeaderLogo/HeaderLogo.component.jsx';
 
 function SiteHeader ({user}) {
   return (
     <StyledSiteHeader>
+      <HeaderLogo />
       <NavLink to="/" >Home</NavLink>
       {user 
         ? <React.Fragment>
