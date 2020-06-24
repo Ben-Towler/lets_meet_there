@@ -1,20 +1,9 @@
-.suggestion {
-  background-color: #f1f1f1;
-  color: gray;
-  font-size: 80%;
-  padding: 0.25em 0.7em;
-}
-
 .locationSearch-container {
-  /* background-color: lightblue; */
-  display: flex;
-  flex-direction: row;
   padding: 1em;
 }
 
 .autocomplete-root {
-  display: flex;
-  flex-direction: row;
+  position: relative;
 }
 
 .form-control {
@@ -24,3 +13,20 @@
   font-family: Lato;
   outline: none;
 }
+
+.autocomplete-dropdown-container {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+}
+
+.suggestion {
+  background-color: #F8F8F8;
+  color: #6E8A97;
+  padding: 0.25em 0.7em;
+}
+
+
+
+
+

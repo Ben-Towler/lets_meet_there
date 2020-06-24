@@ -41,7 +41,7 @@ export default function LocationSearch({ onChange, name, field }) {
   );
 
   return (
-    <div className='locationSearch-container'>
+    <div className="locationSearch-container">
       <PlacesAutocomplete
         value={location}
         name={name}
@@ -49,12 +49,14 @@ export default function LocationSearch({ onChange, name, field }) {
         onSelect={handleLocationSelect}
         // Pass the search options prop
         searchOptions={searchOptions}
+        className="places-autocomplete"
         >
 
         {renderInput}
 
       </PlacesAutocomplete>
     </div>
+
   )
 };
 
