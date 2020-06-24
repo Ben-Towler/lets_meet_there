@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import allReducer from 'Reducers';
 import App from './App';
 import './index.css';
+import 'typeface-lato';
 
 const store = createStore(
   allReducer,

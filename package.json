@@ -35,7 +35,8 @@
     "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
     "save": "^2.4.0",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "typeface-lato": "0.0.75"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,7 +47,13 @@
   "eslintConfig": {
     "extends": "react-app",
     "rules": {
-      "quotes": [2, "single", { "avoidEscape": true }]
+      "quotes": [
+        2,
+        "single",
+        {
+          "avoidEscape": true
+        }
+      ]
     }
   },
   "browserslist": {
@@ -77,4 +84,3 @@
     ]
   }
 }
-
