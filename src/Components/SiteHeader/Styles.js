@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 
 export const StyledNavLink = styled(NavLink)`
   text-decoration: none;
-  color: inherit;
-  cursor: default;
+  color: ${props => props.theme.colors.navyBlue};
+  font-size: ${props => props.theme.fontSizes.small};
 `
 
 export const StyledSiteHeader = styled.header`

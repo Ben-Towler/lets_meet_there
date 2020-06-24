@@ -9,17 +9,17 @@ function SiteHeader ({user}) {
   return (
     <StyledSiteHeader>
       <HeaderLogo />
-        <Button secondary={true}><StyledNavLink to="/" >Home</StyledNavLink></Button>
+        <StyledNavLink to="/" >Home</StyledNavLink>
       {user 
         ? <React.Fragment>
-            <Button primary={true} is="signOut" key="signout" onClick={(e) => auth.signOut()}>
+            <StyledNavLink to="/profile">
+              Profile
+            </StyledNavLink>
+
+            <Button primary={true} id="signOut" key="signout" onClick={(e) => auth.signOut()}>
               Sign Out
             </Button> 
-            <Button secondary={true}>
-              <StyledNavLink to="/profile">
-                Profile
-              </StyledNavLink>
-            </Button>
+
           </React.Fragment>
         : <Button primary={true} id="signin" onClick={(e) => signInWithGoogle()}>
             Sign In with Google

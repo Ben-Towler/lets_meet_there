@@ -17,7 +17,3 @@ export const StyledButton = styled.button`
   outline: none;
   color: ${props => props.theme.colors.navyBlue};
 `;
-
-
-// <Button primary={true} ></Button>
-// <Button secondary={true} ></Button>
