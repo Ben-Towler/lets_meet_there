@@ -33,8 +33,8 @@ describe('Component: SearchForm', () => {
   ];
 
   const testValues = {
-    key: "searchflights",
-    title: "Search for Flights", 
+    key: 'searchflights',
+    title: 'Search for Flights', 
     fields: formFields,
     hasError: false,
     showDateRange: true,
@@ -43,7 +43,7 @@ describe('Component: SearchForm', () => {
 
   const wrapper = shallow(<SearchForm {...testValues} />);
 
-  test.only('it should render correctly', () => {
+  test('it should render correctly', () => {
     const searchFormTree = renderer
       .create(<SearchForm />)
       .toJSON();
@@ -55,3 +55,4 @@ describe('Component: SearchForm', () => {
   });
 
 });
+
