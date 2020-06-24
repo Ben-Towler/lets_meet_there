@@ -4,6 +4,7 @@ import './App.css';
 import { SiteHeader } from 'Components';
 import { Home, ProfilePage } from 'Containers';
 import { auth, createUserProfileDocument } from 'Services/firebase.utils';
+import Theme from './Theme';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(false);
@@ -30,23 +31,25 @@ function App() {
 
   return (
     <React.Fragment>
-      <SiteHeader key='siteheader' user={currentUser} />
-      <Switch>
-        <Route 
-          key='home'
-          path="/" 
-          exact 
-        >
-          <Home currentUser={currentUser} />
-        </Route>
-        <Route
-          key='profile'
-          path='/profile'
-          exact
-        >
-          <ProfilePage user={currentUser} />
-        </Route>
-      </Switch>
+      <Theme>
+        <SiteHeader key='siteheader' user={currentUser} />
+        <Switch>
+          <Route 
+            key='home'
+            path="/" 
+            exact 
+          >
+            <Home currentUser={currentUser} />
+          </Route>
+          <Route
+            key='profile'
+            path='/profile'
+            exact
+          >
+            <ProfilePage user={currentUser} />
+          </Route>
+        </Switch>
+        </Theme>
     </React.Fragment>
   );
 }
