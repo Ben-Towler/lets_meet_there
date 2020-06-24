@@ -13,6 +13,10 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/jest": "^26.0.0",
+    "@types/node": "^14.0.13",
+    "@types/react": "^16.9.39",
+    "@types/react-dom": "^16.9.8",
     "bootstrap": "^4.4.1",
     "dotenv": "^8.2.0",
     "enzyme": "^3.11.0",
@@ -35,7 +39,8 @@
     "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
     "save": "^2.4.0",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "typescript": "^3.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,7 +51,13 @@
   "eslintConfig": {
     "extends": "react-app",
     "rules": {
-      "quotes": [2, "single", { "avoidEscape": true }]
+      "quotes": [
+        2,
+        "single",
+        {
+          "avoidEscape": true
+        }
+      ]
     }
   },
   "browserslist": {
@@ -77,4 +88,3 @@
     ]
   }
 }
-
