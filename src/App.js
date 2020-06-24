@@ -33,11 +33,13 @@ function App() {
         return() => unsubscribeFromAuth();
     }, []);
 
+    //TODO: add more breakpoints 
+
   return (
     <React.Fragment>
       <Grid>
         <Row>
-          <Col md= {7} lg={7}>
+          <Col xs={7} s={7} md= {7} lg={7}> 
             <Theme>
               <SiteHeader key='siteheader'
                   user={currentUser}/>
@@ -51,7 +53,7 @@ function App() {
               </Switch>
             </Theme>
           </Col>
-          <Col md={5} lg={5}>
+          <Col xs={5} s={5} md= {5} lg={5}>
               <HeroImage/>
           </Col>
         </Row>

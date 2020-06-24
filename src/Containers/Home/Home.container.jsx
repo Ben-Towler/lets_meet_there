@@ -5,7 +5,12 @@ import { SearchForm, Spinner } from 'Components';
 import { FlightList } from 'Containers';
 import helpers from 'helpers';
 import { isLoading, getPlaces, getCarriers } from 'Actions';
-import { Wrapper, Hero, Title } from './Styles';
+import { Wrapper, Hero, Title, TitleWrapper, SubTitle } from './Styles';
+
+const style = {
+  'text-decoration': 'underline',
+  'text-decoration-color': '#5FDAE3'
+}
 
 export default function HomePage({currentUser}) {
 
@@ -33,7 +38,10 @@ export default function HomePage({currentUser}) {
   return (
     <Wrapper>
       <Hero>
-        <Title>Search for a place to meet</Title>
+        <TitleWrapper>
+          <SubTitle>PLAN THE PERFECT TRIP TOGETHER</SubTitle>
+          <Title>Search for a place to <span style={style}>meet</span></Title>
+        </TitleWrapper>
         <SearchForm
           searchFlights={searchFlights}
           getPlace={getPlace}
