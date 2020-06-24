@@ -5,12 +5,13 @@ import { configure } from 'enzyme';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { render } from '@testing-library/react';
 import Adapter from 'enzyme-adapter-react-16';
+import {userMocks} from 'Mocks/data.mock';
 configure({adapter: new Adapter()});
 
 describe('Site Header', () => {
 
   test('snapshot matches', () => {
-    const renderer = new ShallowRenderer()
+    const renderer = ShallowRenderer.createRenderer()
     const result = renderer.render(
       <SiteHeader 
         user={null} 
@@ -32,7 +33,7 @@ describe('Site Header', () => {
   test('renders profile and signout when logged in', () => {
     const { getByText } = render(
       <Router>
-        <SiteHeader user={true} />
+        <SiteHeader user={userMocks} />
       </Router>
     );
     const link = getByText('Profile');
@@ -44,9 +45,8 @@ describe('Site Header', () => {
   test('should render and fire a sign out button component', () => {
     const mockFunction = jest.fn();
     const {getByText} = render( <Router>
-                                  <SiteHeader user={true} />
+                                  <SiteHeader user={userMocks} />
                                 </Router>)
-
     const btn = getByText('Sign Out');
     btn.onclick = mockFunction
     btn.click()
@@ -57,7 +57,7 @@ describe('Site Header', () => {
   test('should render and fire a sign in button component', () => {
     const mockFunction = jest.fn();
     const {getByText} = render( <Router>
-                                  <SiteHeader user={false} />
+                                  <SiteHeader />
                                 </Router>)
 
     const btn = getByText('Sign In with Google');
@@ -66,6 +66,5 @@ describe('Site Header', () => {
     expect(mockFunction).toHaveBeenCalled();
     expect(btn).toBeInTheDocument();
   })
-
 });
 

@@ -3,9 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { Button } from 'Components';
 import { StyledSiteHeader } from './Styles';
 import { signInWithGoogle, auth } from '../../Services/firebase.utils';
+import {User} from 'Interfaces/User';
 
 interface Props {
-  user?: any;
+  user?: User;
 }
 
 function SiteHeader ({user}: Props): JSX.Element {

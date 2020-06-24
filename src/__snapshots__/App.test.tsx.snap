@@ -5,11 +5,12 @@ exports[`App App Matches Snapshot snapshot matches 1`] = `
   value={
     Object {
       "store": Object {
+        "clearActions": [Function],
         "dispatch": [Function],
+        "getActions": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
-        Symbol(observable): [Function],
       },
       "subscription": Subscription {
         "handleChangeWrapper": [Function],
@@ -19,11 +20,12 @@ exports[`App App Matches Snapshot snapshot matches 1`] = `
         "onStateChange": [Function],
         "parentSub": undefined,
         "store": Object {
+          "clearActions": [Function],
           "dispatch": [Function],
+          "getActions": [Function],
           "getState": [Function],
           "replaceReducer": [Function],
           "subscribe": [Function],
-          Symbol(observable): [Function],
         },
         "unsubscribe": null,
       },

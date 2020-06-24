@@ -2,11 +2,12 @@
 
 exports[`test the profile page load should match snapshot and render correctly 1`] = `
 <DocumentFragment>
-  Andrew
-  <p
-    id="noQuotes"
+  <div
+    class="spinner-overlay"
   >
-    You have no quotes favourited
-  </p>
+    <div
+      class="spinner-container"
+    />
+  </div>
 </DocumentFragment>
 `;

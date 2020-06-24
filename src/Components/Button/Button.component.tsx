@@ -1,7 +1,15 @@
-import React from 'react';
+import React, {MouseEvent} from 'react';
 import { StyledButton } from './Styles';
 
-function Button ({children, ...props}) {
+interface Props {
+  children: string;
+  type?: 'submit' | 'button' | 'reset';
+  onClick?: (event :MouseEvent<HTMLButtonElement>) => void;
+  id?: string;
+  is?: string;
+}
+
+function Button ({children, ...props}: Props): JSX.Element {
   return (
     <StyledButton {...props}>
       {children}

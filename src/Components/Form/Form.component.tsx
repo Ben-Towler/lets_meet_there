@@ -1,28 +1,27 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import { StyledForm, } from './Styles';
 import { Button } from 'Components';
 import moment from 'moment';
 import 'react-dates/initialize';
-import { DateRangePicker } from 'react-dates';
+import { DateRangePicker, DateRangePickerShape } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import {LocationSearch} from 'Components';
+import {FormData} from 'Interfaces/FormData'
 
-
-
-interface Props {
-  showDateRange? : any;
-  onSubmit?: any;
-  hasError?: any;
-  fields?: any;
+export interface Fields {
+  key: string;
+  title: string;
+  name: string;
+  type: string;
+  placeholder: string;
 }
 
-
-
-interface FormData {
-  location?: any;
-  destination?: any;
-  startDate?: any;
-  endDate?: any;
+interface Props {
+  showDateRange? : boolean;
+  onSubmit?: Function
+  hasError?: boolean;
+  fields?: Fields[];
 }
 
 function Form ({showDateRange, onSubmit, hasError, fields}: Props): JSX.Element {
@@ -36,12 +35,13 @@ function Form ({showDateRange, onSubmit, hasError, fields}: Props): JSX.Element 
     endDate: null,
   });
 
-  function handleChange (name, googleLocation) {
+  function handleChange (name: string, googleLocation: string) {
     let parsedLoc = googleLocation.split(', ');
-    const fields = {...formData};
-    fields[name] = parsedLoc[0];
+    const fieldsObj: FormData = {...formData};
+    const location = {name: parsedLoc[0]};
     
-    setFormData(fields);
+    
+    setFormData({...fieldsObj, ...location});
     isFormValid(formData)
   }
   
@@ -54,13 +54,15 @@ function Form ({showDateRange, onSubmit, hasError, fields}: Props): JSX.Element 
     setIsFormComplete(true);
   }
 
-  function handleSubmit (e) {
+  function handleSubmit (e: Event) {
+    
     e.preventDefault();
-
+    
     if (isFormComplete) {
       const formCriteria: FormData = {
         ...formData,
       }
+      console.log(formCriteria)
 
       if (showDateRange) {
         formCriteria.startDate = formatDate(formDates.startDate);
@@ -71,7 +73,7 @@ function Form ({showDateRange, onSubmit, hasError, fields}: Props): JSX.Element 
     }
   }
 
-  function renderFields (fields) {
+  function renderFields (fields: Fields[]) {
     return fields.map ( function (field) {
       return (
         <LocationSearch 
@@ -84,33 +86,46 @@ function Form ({showDateRange, onSubmit, hasError, fields}: Props): JSX.Element 
     })
   }
 
-  function formatDate (date) {
+  function formatDate (date: string) {
     const formatted = moment(date).format('YYYY MM DD');
     return formatted.split(' ').join('-');
   }
 
+  // interface DRP {
+  //   startDate: string,
+  //   startDateId: string,
+  //   endDate: string,
+  //   endDateId: string,
+  //   onDatesChange: Function,
+  //   showClearDates: Boolean,
+  //   focusedInput: [] | null
+  //   onFocusChange: Function,
+  // }
+
+  interface DRP extends DateRangePickerShape {}
+  const DRPProps : DRP = {
+    startDate: formDates.startDate, 
+    startDateId: 'startDate',
+    endDate: formDates.endDate ,
+    endDateId: 'endDate',
+    onDatesChange: function ({ startDate , endDate }: {startDate: string, endDate: string}) {
+        setFormDates({ startDate, endDate })
+    },
+    showClearDates: true,
+    focusedInput: focus,
+    onFocusChange: (focus: [] | null) => {
+      setFocus(focus);
+    }
+  }
   return (
-    <StyledForm data-testid="form" onSubmit={(e) => handleSubmit(e)}>
+    <StyledForm data-testid='form' onSubmit={(e) => handleSubmit(e)}>
       {hasError ? 'Error' : null}
 
       {renderFields(fields)}
 
       {showDateRange ?
         <DateRangePicker
-          startDate={formDates.startDate}
-          startDateId="startDate"
-          endDate={formDates.endDate} 
-          endDateId="endDate"
-          onDatesChange={
-            function ({ startDate, endDate }) {
-              setFormDates({ startDate, endDate })
-            }
-          }
-          showClearDates={true}
-          focusedInput={focus}
-          onFocusChange={(focus) => {
-            setFocus(focus);
-          }}
+          {...DRPProps}
         /> : null
       }
 

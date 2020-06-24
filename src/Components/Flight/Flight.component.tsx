@@ -1,12 +1,16 @@
 import React from 'react';
 import { BookingLink } from 'Components';
 import { StyledFlight } from './Styles';
+import {Location} from 'Interfaces/Location';
+import {Flight as FlightInterface} from 'Interfaces/Flight';
+import {Place} from 'Interfaces/Place';
+
 
 interface Props {
-  flight: any;
-  places?: any;
-  city?: any;
-  favLocation?: any;
+  flight: FlightInterface;
+  places?: Place;
+  city?: String;
+  favLocation?: Location;
 }
 
 function Flight({ flight, places, city, favLocation }: Props): JSX.Element {

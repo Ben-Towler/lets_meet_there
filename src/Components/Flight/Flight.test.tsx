@@ -3,10 +3,12 @@ import renderer from 'react-test-renderer';
 import { Flight } from 'Components';
 import { render, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import {Flight as FlightInterface} from 'Interfaces/Flight';
+import {Place} from 'Interfaces/Place';
 configure({adapter: new Adapter()});
 
 describe('Flight', () => {
-  let flight, places, flightInDirect;
+  let flight: FlightInterface, places: Place, flightInDirect: FlightInterface;
 
   beforeEach(() => {
     flight = {

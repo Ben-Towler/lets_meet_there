@@ -1,8 +1,13 @@
 import { pickBy } from 'lodash';
+import {Flight} from 'Interfaces/Flight'
+import { GetPlaceResponse } from 'Interfaces/getPlaceResponse';
+import { PlaceResponse } from 'Interfaces/PlaceResponse';
+import placesReducer from 'Reducers/placesReducer';
+import { Place } from 'Interfaces/Place';
 
-const ArrToDict = (array, key) => {
+const ArrToDict = (array: [], key: string) => {
   const initialValue = {};
-  return array.reduce((obj, item) => {
+  return array.reduce((obj: {}, item: {[key: string]: number}) => {
     return {
       ...obj,
       [item[key]]: item,
@@ -10,7 +15,7 @@ const ArrToDict = (array, key) => {
   }, initialValue);
 };
 
-const orderedCollection = (collection) => {
+const orderedCollection = (collection: {[key: string]: any}) => {
   const toArr = Object.keys(collection).map((key) => {
     return [key, ...collection[key]];
   });
@@ -22,7 +27,7 @@ const orderedCollection = (collection) => {
   );
   return sorted;
 };
-const toTitleCase = (str) => {
+const toTitleCase = (str: string) => {
   const resStr = str
     .toLowerCase()
     .split(' ')
@@ -32,21 +37,22 @@ const toTitleCase = (str) => {
 };
 
 export default {
-  createDict: (arrOfObj1, arrOfObj2, key) => {
+  createDict: (arrOfObj1: any, arrOfObj2: any, key: any) => {
 
     let combined = [...arrOfObj1, ...arrOfObj2];
     
 
-    let combined2 = Array.from(
-      new Set(combined.map((a) => a[key])) // creates a new array of just the placeIDs and converts it to a set (no duplicates)
+    let combined2: any = Array.from(
+      new Set(combined.map((a:  any) => a[key])) // creates a new array of just the placeIDs and converts it to a set (no duplicates)
     ).map((num) => {
       // then maps this new array creating another new array of the unique placeID's from the original array.
-      return combined.find((a) => a[key] === num); // find returns the  first element that has the same PlaceId
+      return combined.find((a: any) => a[key] === num); // find returns the  first element that has the same PlaceId
     });
     return ArrToDict(combined2, key);
   },
-  matchFlights: (quotes, quotes2) => {
-    const unionSet = {};
+
+  matchFlights: (quotes: {quotes: Flight[]}, quotes2: {quotes: Flight[]}) => {
+    const unionSet: {[key: number]: Flight[][][]} = {};
   
     for (let i = 0; i < quotes.quotes.length; i++) {
 
@@ -76,7 +82,7 @@ export default {
     orderedCollection(filteredSet);
     return orderedCollection(filteredSet);
   },
-  placeId: (res, query) => {
+  placeId: (res: {Places: GetPlaceResponse[]}, query: string) => {
     if (res.Places.length === 0) return null;
     if (res.Places.length === 1) return res.Places[0].PlaceId;
     let location = toTitleCase(query);
@@ -88,11 +94,14 @@ export default {
     }
     return res.Places[0].PlaceId;
   },
-  getCityName: (flightData, OriginId) => {
-    return flightData.places.filter(place => place.PlaceId === OriginId) 
+  
+  getCityName: (flightData: {places: PlaceResponse[]}, OriginId: number) => {
+    return flightData.places.filter((place: PlaceResponse) => place.PlaceId === OriginId) 
   },
 
-  getLocation: (flightData, destinationId) => {
-    return flightData.places.filter(place => place.PlaceId === destinationId)
+  getLocation: (flightData: {places: PlaceResponse[]}, destinationId: number) => {
+    return flightData.places.filter((place: PlaceResponse) => place.PlaceId === destinationId)
   }
 };
+
+

@@ -1,4 +1,8 @@
-export let fetchRequest = (url: any, options: any, testFetch?: any) => {
+import {Flight} from 'Interfaces/Flight';
+import { Place } from 'Interfaces/Place';
+import { Carrier } from 'Interfaces/Carrier';
+
+export let fetchRequest = (url: string, options: any, testFetch?: Function) => {
   return !testFetch ? fetch(url, options)
     .then((res) => (res.status <= 400 ? res : Promise.reject(res)))
     .then((res) => res.json())
@@ -7,7 +11,7 @@ export let fetchRequest = (url: any, options: any, testFetch?: any) => {
     }) : testFetch(url, options)
 };
 
-export function getFlights(origin: any, outbound: any, inbound: any, testFetch?: any) {
+export function getFlights(origin: string, outbound: string, inbound: string, testFetch?: Function) {
   
   return !testFetch ? fetchRequest(
     `${process.env.REACT_APP_BROWSE_QUOTES}${origin}/anywhere/${outbound}/${inbound}`,
@@ -18,7 +22,7 @@ export function getFlights(origin: any, outbound: any, inbound: any, testFetch?:
         'x-rapidapi-key': process.env.REACT_APP_API_KEY,
       },
     }
-  ).then((data) => {
+  ).then((data: {Quotes: Flight[], Places: Place[], Carriers: Carrier[]}) => {
     const quote = {
       quotes: data.Quotes,
       places: data.Places,
@@ -28,7 +32,7 @@ export function getFlights(origin: any, outbound: any, inbound: any, testFetch?:
   }) : testFetch();
 }
 
-export function getPlace (query: any, testFetch?: any) {
+export function getPlace (query: string, testFetch?: Function) {
   return !testFetch ? fetchRequest(`${process.env.REACT_APP_AUTOSUGGEST}${query}`, {
     method: 'GET',
     headers: {
@@ -38,7 +42,7 @@ export function getPlace (query: any, testFetch?: any) {
   }) : testFetch();
 }
 
-export async function getFavFlights (origin: any, destination: any, outbound: any, inbound: any, testFetch?: any) {
+export async function getFavFlights (origin: string, destination: string, outbound: string, inbound: string, testFetch?: Function) {
   return !testFetch ? fetchRequest(
     `${process.env.REACT_APP_BROWSE_QUOTES}${origin}/${destination}/${outbound}/${inbound}`,
     {
@@ -48,7 +52,7 @@ export async function getFavFlights (origin: any, destination: any, outbound: an
         'x-rapidapi-key': process.env.REACT_APP_API_KEY,
       },
     }
-  ).then((data) => {
+  ).then((data: {Quotes: Flight[], Places: Place[], Carriers: Carrier[]}) => {
     const quote = {
       quotes: data.Quotes,
       places: data.Places,

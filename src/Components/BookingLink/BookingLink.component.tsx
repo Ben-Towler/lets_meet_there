@@ -1,13 +1,16 @@
 import React from 'react';
 import { StyledBookingLink } from './Styles';
+import {Journey} from './BookingLink.test';
+import {Flight as FlightInterface} from 'Interfaces/Flight'; 
 require('dotenv').config();
 
+
 interface Props {
-  inbound?: any;
-  outbound?: any;
-  flight?: any;
-  city?: any;
-  favCity?: any;
+  inbound: Journey;
+  outbound: Journey;
+  flight: FlightInterface;
+  city?: String;
+  favCity?: String;
 }
 
 function BookingLink ({inbound, outbound, flight, city, favCity}: Props): JSX.Element {
@@ -22,7 +25,7 @@ function BookingLink ({inbound, outbound, flight, city, favCity}: Props): JSX.El
     return [...bookingDetails].join('/');
   }
 
-  function trim (string, start, end) {
+  function trim (string: String, start: number, end: number) {
     return string.slice(start, end);
   }
 

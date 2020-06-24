@@ -76,6 +76,35 @@ export const flightTwo = {
   QuoteId: 10
 }
 
+export const userMockNoData = {
+  displayName: 'Andrew',
+  email: '',
+  createdAt: {nanoseconds: 0, seconds: 0},
+  id: 'a-1',
+  favourites: [] as []
+}
+
+export const userMocks = {
+  displayName: 'Andrew',
+  email: 'c@c.com',
+  id: 'a-1',
+  createdAt: {seconds: 0, nanoseconds: 0},
+  favourites: [{
+    userRequest: {
+      origin: 'LOND',
+      destination: 'DUSS',
+      outboundDate: '2020-06-23',
+      inboundDate: '2020-06-25'
+    },
+    friendRequest: {
+      origin: 'BERL',
+      destination: 'DUSS',
+      outboundDate: '2020-06-23',
+      inboundDate: '2020-06-25'
+    }
+  }]
+}
+
 export const flightListMock = [[
   66328,
   [

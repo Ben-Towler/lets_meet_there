@@ -4,15 +4,19 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store'
 import Trip from './Trip.component';
 import Adapter from 'enzyme-adapter-react-16';
-import * as ReactReduxHooks from "../../Mocks/hooks";
+import * as ReactReduxHooks from '../../Mocks/hooks';
 import { configure } from 'enzyme';
-import thunk from "redux-thunk";
-import {placeMocks, quotes, carriers, flightOne, flightTwo, favLocation, userCity, friendCity, searchDetailsForRemoveHandler} from '../../Mocks/data.mock';
+import thunk from 'redux-thunk';
+import {placeMocks, quotes, carriers, flightOne, flightTwo, favLocation, userCity, friendCity, searchDetailsForRemoveHandler, userMockNoData} from '../../Mocks/data.mock';
 configure({adapter: new Adapter()});
 
 describe('Trip', () => {
-  let store;
-  let wrapper;
+  let store = configureStore([thunk])({
+    places: placeMocks,
+    quotes: quotes,
+    carriers: carriers
+  });
+  let wrapper: any;
   
   beforeEach(() => {
     store = configureStore([thunk])({
@@ -84,9 +88,7 @@ describe('Trip', () => {
           yourFlight={flightOne} 
           friendsFlight={flightTwo}
           location={65698}
-          user={{
-            favourites: []
-          }}
+          user={userMockNoData}
           
         />
       </Provider>)
@@ -110,9 +112,7 @@ describe('Trip', () => {
           userCity={userCity}
           friendCity={friendCity}
           favLocation={favLocation}
-          user={{
-            favourites: []
-          }}
+          user={userMockNoData}
           removeFromFavouritesHandler={mockFunction}
           searchDetailsForRemoveHandler={searchDetailsForRemoveHandler}
         />

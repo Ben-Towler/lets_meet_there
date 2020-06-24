@@ -14,7 +14,7 @@ beforeAll(() => {
 describe('Component: SearchForm', () => {
 
   //TODO: add expected return data from the onSubmit event
-  const wrapper = shallow(<SearchForm />);
+  const wrapper: any = shallow(<SearchForm />);
 
   test.only('it should render correctly', () => {
     const searchFormTree = renderer

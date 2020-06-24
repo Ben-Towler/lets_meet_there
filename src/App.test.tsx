@@ -3,12 +3,13 @@ import App from './App';
 import { ProfilePage, Home } from 'Containers';
 import { Provider } from 'react-redux';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { createStore, applyMiddleware } from 'redux'; 
 import { shallow, configure, mount } from 'enzyme';
 import { Route } from 'react-router-dom';
 import { MemoryRouter } from 'react-router';
+import configureStore from 'redux-mock-store'
 import Adapter from 'enzyme-adapter-react-16';
 import { setupGoogleMock } from './Mocks/googleMapsApiMock';
+import {userMocks} from 'Mocks/data.mock';
 
 configure({adapter: new Adapter()});
 
@@ -16,41 +17,19 @@ beforeAll(() => {
   setupGoogleMock();
 });
 
-const mocks = {
-  user: {
-    displayName: 'Andrew',
-    favourites: [{
-      userRequest: {
-        origin: 'LOND',
-        destination: 'DUSS',
-        outboundDate: '2020-06-23',
-        inboundDate: '2020-06-25'
-      },
-      friendRequest: {
-        origin: 'BERL',
-        destination: 'DUSS',
-        outboundDate: '2020-06-23',
-        inboundDate: '2020-06-25'
-      }
-    }]
-  },
-  noDataUser: {
-    displayName: 'Andrew',
-    favourites: []
-  }
-};
+
 
 
 describe('App', () => {
-  let store;
+  let store = configureStore()({});
 
   beforeEach(() => {
-    store = createStore(() => [], applyMiddleware());
+    store = configureStore()({});
   })
 
   describe('App Matches Snapshot', () => {
     test('snapshot matches', () => {
-      const renderer = new ShallowRenderer()
+      const renderer = ShallowRenderer.createRenderer();
       const result = renderer.render(
         <Provider store={store}>
           <App />
@@ -81,7 +60,7 @@ describe('App', () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={['/profile']}>
         <Provider store={store}> 
-          <Route path="/profile" render={() => <ProfilePage user={mocks.user} />} />
+          <Route path="/profile" render={() => <ProfilePage user={userMocks} />} />
         </Provider>
       </MemoryRouter>
     );

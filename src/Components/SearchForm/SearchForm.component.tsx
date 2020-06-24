@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { StyledSearchForm } from './Styles';
 import { Form } from 'Components';
+import {FormData} from 'Interfaces/FormData';
 
 interface Props {
-  searchFlights?: any;
-  getPlace?: any
+  searchFlights?: Function;
+  getPlace?: Function
 }
 
 function SearchForm ({ searchFlights, getPlace }: Props): JSX.Element {
   const [hasError, setHasError] = useState(false);
 
-  async function flightResults (formData) {
+  async function flightResults (formData: FormData) {
     try {
       const flightData = [
         await getPlace(formData.location),
@@ -24,7 +25,7 @@ function SearchForm ({ searchFlights, getPlace }: Props): JSX.Element {
     }
   }
 
-  async function fetchFlightResults (formData) {
+  async function fetchFlightResults (formData: FormData) {
     if (!formData) setHasError(true);
     await flightResults(formData);
   };

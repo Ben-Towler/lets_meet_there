@@ -1,4 +1,4 @@
-const isLoadingReducer = (state = false, action) => {
+const isLoadingReducer = (state = false, action: {type?: string}) => {
   switch (action.type) {
     case 'home/isLoading':
       return !state;

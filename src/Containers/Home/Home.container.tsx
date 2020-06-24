@@ -6,25 +6,27 @@ import { FlightList } from 'Containers';
 import helpers from 'helpers';
 import { isLoading, getPlaces, getCarriers } from 'Actions';
 import { Wrapper, Hero, Title } from './Styles';
+import {User} from 'Interfaces/User';
+import {GetPlaceResponse} from 'Interfaces/getPlaceResponse';
 
 interface Props {
-  currentUser?: any;
+  currentUser?: User;
 }
 
 export default function HomePage({currentUser}: Props): JSX.Element {
 
   const [matched, setMatched] = useState([]);
   // Redux items
-  const loading = useSelector((state) => state.isLoading);
+  const loading = useSelector((state: {isLoading: Boolean}) => state.isLoading);
   const dispatch = useDispatch();
 
-  const getPlace = async (query) => {
-    return apiGetPlace(query).then((res) => {
+  const getPlace = async (query: string) => {
+    return apiGetPlace(query).then((res: {Places: GetPlaceResponse[]}) => {
       return helpers.placeId(res, query);
     });
   };
 
-  const searchFlights = async (from1, from2, departDate, returnDate) => {
+  const searchFlights = async (from1: string, from2: string, departDate: string, returnDate: string) => {
     dispatch(isLoading());
     const quotesA = await getFlights(from1, departDate, returnDate);
     const quotesB = await getFlights(from2, departDate, returnDate);

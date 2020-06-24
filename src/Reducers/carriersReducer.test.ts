@@ -1,5 +1,7 @@
 import carriersReducer from './carriersReducer';
 
+
+
 describe('carriersReducer', () => {
   it('should should reduce the quote arrays into one state object', () => {
     expect(carriersReducer({}, {
@@ -27,5 +29,4 @@ describe('carriersReducer', () => {
       quotesB: [{Name: 'United Arab Emirates',CarrierId: 837}]
     })).toEqual({837: {CarrierId: 837, Name: 'United Arab Emirates'}})
   })
-
 })

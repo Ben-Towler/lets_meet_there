@@ -9,7 +9,7 @@ configure({adapter: new Adapter()});
 describe('Flight Tile', () => {
 
   it('Matches snapshot', () => {
-    const renderer = new ShallowRenderer()
+    const renderer = ShallowRenderer.createRenderer();
     const result = renderer.render(
       <FlightList 
         matchedFlights={flightListMock} 

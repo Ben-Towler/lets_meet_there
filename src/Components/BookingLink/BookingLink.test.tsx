@@ -1,9 +1,16 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {BookingLink} from 'Components';
+import {Flight as FlightInterface} from 'Interfaces/Flight';
+import {PlaceJourney} from 'Interfaces/PlaceJourney';
+
+export interface Journey {
+  origin: PlaceJourney;
+  destination: PlaceJourney;
+}
  
 describe('Booking Link', () => {
-  let inbound, outbound, flight;
+  let inbound: Journey, outbound: Journey, flight: FlightInterface;
 
   beforeEach(() => {
     inbound = {

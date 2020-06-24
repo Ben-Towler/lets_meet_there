@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyledFlightSummary } from './Styles';
+import {Location} from 'Interfaces/Location';
 
 interface Props {
-  location: any
+  location: Location
 }
 
 function FlightSummary ({ location }: Props): JSX.Element {

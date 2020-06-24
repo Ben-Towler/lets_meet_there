@@ -1,40 +1,28 @@
 import React from 'react'
 import {render} from '@testing-library/react'
 import {ProfilePage} from 'Containers';
+import { userMocks } from 'Mocks/data.mock';
+import { Favourites } from 'Interfaces/User';
  
 const mocks = {
-  user: {
-    displayName: 'Andrew',
-    favourites: [{
-      userRequest: {
-        origin: 'LOND',
-        destination: 'DUSS',
-        outboundDate: '2020-06-23',
-        inboundDate: '2020-06-25'
-      },
-      friendRequest: {
-        origin: 'BERL',
-        destination: 'DUSS',
-        outboundDate: '2020-06-23',
-        inboundDate: '2020-06-25'
-      }
-    }]
-  },
   noDataUser: {
     displayName: 'Andrew',
-    favourites: []
+    email: '',
+    createdAt: {nanoseconds: 0, seconds: 0},
+    id: '',
+    favourites: [] as Favourites[]
   }
 };
 
 describe('test the profile page load', () => {
   it('should match snapshot and render correctly', () => {
-    const { asFragment } = render(<ProfilePage user={mocks.noDataUser} />);
+    const { asFragment } = render(<ProfilePage user={userMocks} />);
     
     expect(asFragment()).toMatchSnapshot();
   })
   
-  it('should display user display name', () => {
-    const { queryByText } = render(<ProfilePage user={mocks.noDataUser} />);
+  it('Should display the displayName', () => {
+    const { queryByText } = render(<ProfilePage user={userMocks} />);
     const display = queryByText('Andrew');
     expect(display).toBeInTheDocument();
   })
@@ -46,7 +34,7 @@ describe('test the profile page load', () => {
   })
 
   it('should render differently when favourite data exists', () => {
-    const { queryByText } = render(<ProfilePage user={mocks.user} />);
+    const { queryByText } = render(<ProfilePage user={userMocks} />);
     const noQuotes = queryByText('You have no quotes favourited');
     expect(noQuotes).not.toBeInTheDocument();
   })

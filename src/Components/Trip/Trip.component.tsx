@@ -1,32 +1,45 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { StyledTrip } from './Styles';
-import { Flight, FlightSummary } from 'Components';
+import { Flight, FlightSummary, Button } from 'Components';
 import { firestore } from '../../Services/firebase.utils';
+import {Flight as FlightInterface} from 'Interfaces/Flight';
+import {Location} from 'Interfaces/Location';
+import {User as UserInterface} from 'Interfaces/User';
+
 
 interface Props {
-  yourFlight?: any;
-  friendsFlight?: any;
-  location?: any;
-  favourites?: any;
-  userCity?: any;
-  friendCity?: any;
-  favLocation?: any;
-  removeFromFavouritesHandler?: any;
-  searchDetailsForRemoveHandler?: any;
-  user?: any;
+  yourFlight: FlightInterface;
+  friendsFlight: FlightInterface;
+  location?: number;
+  favourites?: Boolean;
+  userCity?: string;
+  friendCity?: string;
+  favLocation?: Location;
+  removeFromFavouritesHandler?: Function
+  searchDetailsForRemoveHandler?: {origin: string, destination: string, outboundDate: string, inboundDate: string};
+  user?: UserInterface;
 }
 
+// interface StatePlace {
+//   Name: string, 
+//   PlaceId: number, 
+//   SkyscannerCode: string, 
+//   type: string
+// }
+
+// {[key: any]: StatePlace}
+
 function Trip ({ yourFlight, friendsFlight, location, favourites, userCity, friendCity, favLocation, removeFromFavouritesHandler, searchDetailsForRemoveHandler, user }: Props): JSX.Element {
-  const places = useSelector((state) => state.places);
-  const carriers = useSelector((state) => state.carriers);
+  const places = useSelector((state: any) => state.places);
+  const carriers = useSelector((state: any) => state.carriers);
 
   const meetingLocation = {
     city: favLocation ? favLocation.city : places[location].CityName,
     country: favLocation ? favLocation.country : places[location].CountryName
   };
 
-  const addToFavouritesHandler = async (e) => {
+  const addToFavouritesHandler = async () => {
     const requestData = {
       userRequest: {
         origin: places[yourFlight.OutboundLeg.OriginId].CityId,

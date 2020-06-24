@@ -3,10 +3,12 @@ import React, {useState, useEffect} from 'react';
 import { getFavFlights } from 'Services/ApiClient';
 import { Trip, Spinner } from 'Components';
 import { firestore } from 'Services/firebase.utils';
+import {User} from 'Interfaces/User'
+import {FavFlight} from 'Interfaces/FavFlight';
 import helpers from '../../helpers';
 
 interface Props {
-  user?: any;
+  user?: User;
 }
 
 
@@ -15,7 +17,7 @@ export default function ProfilePage({user}: Props): JSX.Element {
   const [isLoading, setIsLoading] = useState(false)
   const [favData, setFavData] = useState<any>();
 
-  const removeFromFavouritesHandler = async (origin, destination, outboundDate, inboundDate) => {
+  const removeFromFavouritesHandler = async (origin: string, destination: string, outboundDate: string, inboundDate: string) => {
     const filteredData = user.favourites.filter(request => {
       const {userRequest} = request
       if (userRequest.origin === origin && userRequest.destination === destination && userRequest.outboundDate === outboundDate && userRequest.inboundDate === inboundDate) return false
@@ -32,8 +34,8 @@ export default function ProfilePage({user}: Props): JSX.Element {
         setIsLoading(true)
         const userFlightData = await getFavFlights(userRequest.origin, userRequest.destination, userRequest.outboundDate, userRequest.inboundDate )
         const friendFlightData = await getFavFlights(friendRequest.origin, friendRequest.destination, friendRequest.outboundDate, friendRequest.inboundDate)
-        const userFlightList = userFlightData.quotes.sort((a,b) => a.MinPrice - b.MinPrice);
-        const friendFlightList = friendFlightData.quotes.sort((a,b) => a.MinPrice - b.MinPrice);
+        const userFlightList = userFlightData.quotes.sort((a: FavFlight,b: FavFlight) => a.MinPrice - b.MinPrice);
+        const friendFlightList = friendFlightData.quotes.sort((a: FavFlight,b: FavFlight) => a.MinPrice - b.MinPrice);
         const userCityName = helpers.getCityName(userFlightData, userFlightList[0].OutboundLeg.OriginId)[0].CityName
         const friendCityName = helpers.getCityName(friendFlightData, friendFlightList[0].OutboundLeg.OriginId)[0].CityName
         const locationDetails = helpers.getLocation(userFlightData, userFlightList[0].OutboundLeg.DestinationId);
