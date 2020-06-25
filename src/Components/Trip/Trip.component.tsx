@@ -35,36 +35,40 @@ function Trip ({ yourFlight, friendsFlight, location, favourites, userCity, frie
   const carriers = useSelector((state: any) => state.carriers);
 
   const meetingLocation = {
-    city: favLocation ? favLocation.city : places[location].CityName,
-    country: favLocation ? favLocation.country : places[location].CountryName
+    city: favLocation ? favLocation.city : places[location!].CityName,
+    country: favLocation ? favLocation.country : places[location!].CountryName
   };
 
   const addToFavouritesHandler = async () => {
     const requestData = {
       userRequest: {
         origin: places[yourFlight.OutboundLeg.OriginId].CityId,
-        destination: places[location].CityId,
+        destination: places[location!].CityId,
         outboundDate: yourFlight.OutboundLeg.DepartureDate.slice(0, 10),
         inboundDate: yourFlight.InboundLeg.DepartureDate.slice(0, 10)
       },
       friendRequest: {
         origin: places[friendsFlight.OutboundLeg.OriginId].CityId,
-        destination: places[location].CityId,
+        destination: places[location!].CityId,
         outboundDate: friendsFlight.OutboundLeg.DepartureDate.slice(0, 10),
         inboundDate: friendsFlight.InboundLeg.DepartureDate.slice(0, 10)
       }
     }
-    const userRef = await firestore.doc(`users/${user.id}`);
-    userRef.update({ favourites: JSON.stringify([...user.favourites, requestData]) });
+    if (user){
+      const userRef = await firestore.doc(`users/${user.id}`);
+      userRef.update({ favourites: JSON.stringify([...user.favourites, requestData]) });
+    }
   }
 
   const favouritesButton = !favourites ? <button onClick={addToFavouritesHandler}>Add To Favourites</button> :
+    removeFromFavouritesHandler && searchDetailsForRemoveHandler && 
     <button onClick={() => removeFromFavouritesHandler (
       searchDetailsForRemoveHandler.origin, 
       searchDetailsForRemoveHandler.destination, 
       searchDetailsForRemoveHandler.outboundDate, 
       searchDetailsForRemoveHandler.inboundDate
     )}>Remove From Favourites</button>
+
   ;
 
   const yourFlightPlaces = {

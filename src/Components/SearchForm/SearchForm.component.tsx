@@ -4,8 +4,8 @@ import { Form } from 'Components';
 import {FormData} from 'Interfaces/FormData';
 
 interface Props {
-  searchFlights?: Function;
-  getPlace?: Function
+  searchFlights: Function;
+  getPlace: Function
 }
 
 function SearchForm ({ searchFlights, getPlace }: Props): JSX.Element {

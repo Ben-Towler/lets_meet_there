@@ -9,16 +9,16 @@ interface Props {
   inbound: Journey;
   outbound: Journey;
   flight: FlightInterface;
-  city?: String;
-  favCity?: String;
+  city?: string;
+  favCity?: string;
 }
 
 function BookingLink ({inbound, outbound, flight, city, favCity}: Props): JSX.Element {
   
   function bookingParams () {
     const bookingDetails = [
-      trim(city ? city : outbound.origin.CityName, 0, 4),
-      trim(favCity ? favCity : inbound.origin.CityName, 0, 4),
+      trim(city ? city : outbound.origin.CityName!, 0, 4),
+      trim(favCity ? favCity : inbound.origin.CityName!, 0, 4),
       trim(flight.OutboundLeg.DepartureDate, 0, 10),
       trim(flight.InboundLeg.DepartureDate, 0, 10)
     ];

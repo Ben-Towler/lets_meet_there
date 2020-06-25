@@ -49,7 +49,7 @@ export default {
     return ArrToDict(combined2, key);
   },
 
-  matchFlights: (quotes: {quotes: Flight[]}, quotes2: {quotes: Flight[]}) => {
+  matchFlights: (quotes: {quotes: Flight[]}, quotes2: {quotes: Flight[]}): any => {
     const unionSet: {[key: number]: Flight[][][]} = {};
   
     for (let i = 0; i < quotes.quotes.length; i++) {

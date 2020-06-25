@@ -8,8 +8,8 @@ import {Place} from 'Interfaces/Place';
 
 interface Props {
   flight: FlightInterface;
-  places?: Place;
-  city?: String;
+  places: Place;
+  city?: string;
   favLocation?: Location;
 }
 
