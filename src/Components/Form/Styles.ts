@@ -6,7 +6,8 @@ export const BluePlaneTakeOff = styled(PlaneTakeOff)`
 `;
 
 export const StyledForm = styled.form`
-
+  display: flex;
+  align-items: center;
 `;
 
 export const StyledLocationSearchWrapper = styled.div`

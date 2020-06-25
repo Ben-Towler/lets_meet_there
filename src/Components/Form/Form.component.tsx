@@ -42,11 +42,16 @@ function Form ({showDateRange, onSubmit, hasError, fields}: Props): JSX.Element 
     let location = {};
     location[name] = parsedLoc[0];
     
+    // console.log("NAME ", name);
+    // console.log("LOCATION ", googleLocation);
+    console.log('fieldsObj ', fieldsObj);
+    console.log('LOCATION ', location);
     setFormData({...fieldsObj, ...location});
     isFormValid(formData)
   }
   
   function isFormValid (fields) {
+    console.log('FIELDS', fields);
     for (let i = 0; i < fields.length - 1; i++) {
      if (fields[i].length === 0) {
        setIsFormComplete(false);
@@ -59,16 +64,18 @@ function Form ({showDateRange, onSubmit, hasError, fields}: Props): JSX.Element 
     
     e.preventDefault();
     
+    console.log('HERE');
     if (isFormComplete) {
+      console.log('FORM ', isFormComplete);
       const formCriteria: FormData = {
         ...formData,
       }
-
+      
       if (showDateRange) {
         formCriteria.startDate = formatDate(formDates.startDate);
         formCriteria.endDate = formatDate(formDates.endDate);
       }
-
+      console.log('FORM CRITERIA ', formCriteria);
       onSubmit(formCriteria);
     }
   }
@@ -129,7 +136,7 @@ function Form ({showDateRange, onSubmit, hasError, fields}: Props): JSX.Element 
         /> : null
       }
 
-      <Button type="submit">Submit</Button>
+      <Button tertiary={true} type="submit">Submit</Button>
     </StyledForm>
   )
 }

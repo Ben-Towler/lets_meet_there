@@ -1,9 +1,16 @@
 .locationSearch-container {
   padding: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .autocomplete-root {
   position: relative;
+}
+
+.autocomplete-root > input {
+  height: 44px;
 }
 
 .form-control {

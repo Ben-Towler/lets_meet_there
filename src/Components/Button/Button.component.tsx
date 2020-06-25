@@ -1,4 +1,4 @@
-import React, {MouseEvent} from 'react';
+import React, { MouseEvent } from 'react';
 import { StyledButton } from './Styles';
 
 interface Props {
@@ -7,6 +7,9 @@ interface Props {
   onClick?: (event :MouseEvent<HTMLButtonElement>) => void;
   id?: string;
   is?: string;
+  primary?: Boolean, 
+  secondary?: Boolean, 
+  tertiary?: Boolean
 }
 
 function Button ({children, ...props}: Props): JSX.Element {

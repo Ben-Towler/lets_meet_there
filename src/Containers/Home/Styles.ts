@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.section`
+  max-width: 80%;
+  margin: 0 auto;
 `;
 
 export const TitleWrapper = styled.section`
@@ -9,7 +11,6 @@ export const TitleWrapper = styled.section`
 `;
 
 export const Hero = styled.section`
-  background-color: #fff;
   height: 90vh;
 `;
 

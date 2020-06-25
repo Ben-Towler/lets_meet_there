@@ -11,8 +11,11 @@ body {
     'Segoe UI';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background: url(./assets/heroImage.jpg); TODO: figure out how to set as background image
-  background-repeat: inherit; */
+  background-image: url(./assets/heroImage.jpg);
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: contain;
+  
 }
 
 code {

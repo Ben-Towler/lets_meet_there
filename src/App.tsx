@@ -42,9 +42,9 @@ function App(): JSX.Element {
 
   return (
     <React.Fragment>
-      <Grid>
+      {/* <Grid>
         <Row>
-          <Col xs={7} s={7} md= {7} lg={7}> 
+          <Col xs={7} s={7} md= {7} lg={7}>  */}
             <Theme>
               <SiteHeader key='siteheader'
                   user={currentUser}/>
@@ -57,12 +57,12 @@ function App(): JSX.Element {
                 </Route>
               </Switch>
             </Theme>
-          </Col>
+          {/* </Col>
           <Col xs={5} s={5} md= {5} lg={5}>
               <HeroImage/>
           </Col>
         </Row>
-      </Grid>
+      </Grid> */}
     </React.Fragment>
   );
 }
