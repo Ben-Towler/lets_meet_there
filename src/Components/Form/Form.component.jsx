@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyledForm, StyledDateWrapper, BluePlaneTakeOff } from './Styles';
+import { StyledForm, StyledDateWrapper, BluePlaneTakeOff, StyledLocationSearchWrapper } from './Styles';
 import { Button } from 'Components';
 import moment from 'moment';
 import 'react-dates/initialize';
@@ -46,8 +46,6 @@ function Form (props) {
       }
 
       if (props.showDateRange) {
-        console.log('formDates.startDate', formDates.startDate);
-        console.log('formDates.endDate', formDates.endDate);
         formCriteria.startDate = formatDate(formDates.startDate);
         formCriteria.endDate = formatDate(formDates.endDate);
       }
@@ -79,9 +77,11 @@ function Form (props) {
     <StyledForm data-testid="form" onSubmit={(e) => handleSubmit(e)}>
       {props.hasError ? 'Error' : null}
 
-      <BluePlaneTakeOff size='48' color='#5FDAE3'/>
-      
-      {renderFields(props.fields)}
+      <StyledLocationSearchWrapper>
+        <BluePlaneTakeOff size='48' color='#5FDAE3'/>
+        
+        {renderFields(props.fields)}
+      </StyledLocationSearchWrapper>
 
       <StyledDateWrapper>
         {props.showDateRange ?
@@ -102,10 +102,12 @@ function Form (props) {
             }}
           /> : null
         }
+
+        <Button tertiary={true} type="submit">Submit</Button>
       </StyledDateWrapper>
 
 
-      <Button type="submit">Submit</Button>
+      
     </StyledForm>
   )
 }

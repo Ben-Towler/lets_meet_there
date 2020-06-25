@@ -6,13 +6,20 @@ export const BluePlaneTakeOff = styled(PlaneTakeOff)`
 `;
 
 export const StyledForm = styled.form`
-  /* background-color: yellow; */
-  padding: 1em;
+
+`;
+
+export const StyledLocationSearchWrapper = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 export const StyledDateWrapper = styled.div`
-  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 1em;
 `;
 
 export const Row = styled.div`

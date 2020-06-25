@@ -8,8 +8,8 @@ import { isLoading, getPlaces, getCarriers } from 'Actions';
 import { Wrapper, Hero, Title, TitleWrapper, SubTitle } from './Styles';
 
 const style = {
-  'text-decoration': 'underline',
-  'text-decoration-color': '#5FDAE3'
+  'textDecoration': 'underline',
+  'textDecorationColor': '#5FDAE3'
 }
 
 export default function HomePage({currentUser}) {
