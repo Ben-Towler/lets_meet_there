@@ -73,7 +73,6 @@ export default function LocationSearch({ onChange, name, field }: Props): JSX.El
     <div>
       <PlacesAutocomplete
         value={location} 
-        // name={name}
         onChange={handleLocationChange}
         onSelect={handleLocationSelect}
         searchOptions={searchOptions}
