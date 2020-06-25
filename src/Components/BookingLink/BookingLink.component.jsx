@@ -2,6 +2,11 @@ import React from 'react';
 import { StyledBookingLink } from './Styles';
 require('dotenv').config();
 
+const style = {
+  'textDecoration': 'underline',
+  'textDecorationColor': '#FEA000'
+}
+
 function BookingLink ({inbound, outbound, flight, city, favCity}) {
   
   function bookingParams () {
@@ -26,7 +31,7 @@ function BookingLink ({inbound, outbound, flight, city, favCity}) {
       title="Book Flights"
       target="_blank"
     >
-      Book Your Flights
+      <span style={style}>Book Your Flights</span>
     </StyledBookingLink>
   )
 }

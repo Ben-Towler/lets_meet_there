@@ -8,7 +8,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import LocationSearch from '../LocationSearch/locationSearch';
 
 
-function Form (props) {
+function Form ({ showDateRange, onSubmit, hasError, fields }) {
   const [focus, setFocus] = useState(null);
   const [formData, setFormData] = useState({});
   const [isFormComplete, setIsFormComplete] = useState(false);
@@ -21,10 +21,12 @@ function Form (props) {
 
   function handleChange (name, googleLocation) {
     let parsedLoc = googleLocation.split(', ');
-    const fields = {...formData};
-    fields[name] = parsedLoc[0];
-    
-    setFormData(fields);
+
+    const fieldsObj = {...formData};
+    let location = {};
+    location[name] = parsedLoc[0];
+
+    setFormData({...fieldsObj, ...location});
     isFormValid(formData)
   }
   
@@ -45,12 +47,12 @@ function Form (props) {
         ...formData,
       }
 
-      if (props.showDateRange) {
+      if (showDateRange) {
         formCriteria.startDate = formatDate(formDates.startDate);
         formCriteria.endDate = formatDate(formDates.endDate);
       }
 
-      props.onSubmit(formCriteria);
+      onSubmit(formCriteria);
     }
   }
 
@@ -75,16 +77,16 @@ function Form (props) {
 
   return (
     <StyledForm data-testid="form" onSubmit={(e) => handleSubmit(e)}>
-      {props.hasError ? 'Error' : null}
+      {hasError ? 'Error' : null}
 
       <StyledLocationSearchWrapper>
         <BluePlaneTakeOff size='48' color='#5FDAE3'/>
         
-        {renderFields(props.fields)}
+        {renderFields(fields)}
       </StyledLocationSearchWrapper>
 
       <StyledDateWrapper>
-        {props.showDateRange ?
+        {showDateRange ?
           <DateRangePicker
             startDate={formDates.startDate}
             startDateId="startDate"

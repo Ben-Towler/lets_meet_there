@@ -16,7 +16,7 @@ export default function LocationSearch({ onChange, name, field }) {
   
     geocodeByAddress(location)
       .then((results) => { 
-        onChange(field.name, results[0].formatted_address) })
+        onChange(name, results[0].formatted_address) })
       .catch(error => console.log(`Error fetching location`, error))
  
   };
@@ -44,7 +44,6 @@ export default function LocationSearch({ onChange, name, field }) {
     <div className="locationSearch-container">
       <PlacesAutocomplete
         value={location}
-        name={name}
         onChange={handleLocationChange}
         onSelect={handleLocationSelect}
         // Pass the search options prop
