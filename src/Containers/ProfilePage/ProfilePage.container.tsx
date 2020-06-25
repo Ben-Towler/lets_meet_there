@@ -9,27 +9,31 @@ import helpers from '../../helpers';
 
 interface Props {
   user?: User;
+  withSpinner?: Boolean
 }
 
 
-export default function ProfilePage({user}: Props): JSX.Element {
+export default function ProfilePage({user, withSpinner}: Props): JSX.Element {
   const [isLoading, setIsLoading] = useState(false)
   const [favData, setFavData] = useState<any>();
   const history = useHistory();
 
   const removeFromFavouritesHandler = async (origin: string, destination: string, outboundDate: string, inboundDate: string) => {
     
-    const filteredData = user.favourites.filter(request => {
-      const {userRequest} = request
-      if (userRequest.origin === origin && userRequest.destination === destination && userRequest.outboundDate === outboundDate && userRequest.inboundDate === inboundDate) return false
-      return true;
-    });
-    const userRef = await firestore.doc(`users/${user.id}`);
-    userRef.update({ favourites: JSON.stringify([...filteredData]) });
+    if(user){
+      const filteredData = user.favourites.filter(request => {
+        const {userRequest} = request
+        if (userRequest.origin === origin && userRequest.destination === destination && userRequest.outboundDate === outboundDate && userRequest.inboundDate === inboundDate) return false
+        return true;
+      });
+      const userRef = await firestore.doc(`users/${user.id}`);
+      userRef.update({ favourites: JSON.stringify([...filteredData]) });
+    }
   }
   
 
   function favListData() {
+    if(user) {
       return Promise.all(user.favourites.map(async requestData => {
         const {userRequest, friendRequest} = requestData;
         setIsLoading(true)
@@ -54,12 +58,13 @@ export default function ProfilePage({user}: Props): JSX.Element {
             user={user}
           />
       }))
+    }
   }
 
   useEffect(() => {
     user || history.push('/')
     if (user && user.favourites && user.favourites.length ){ 
-      favListData().then(data => {
+      favListData()?.then(data => {
         setIsLoading(false)
         setFavData(data);
       })
@@ -69,7 +74,7 @@ export default function ProfilePage({user}: Props): JSX.Element {
   return (
     <React.Fragment>
       {
-        isLoading 
+        isLoading && !withSpinner 
           ? <Spinner /> 
           : <React.Fragment>
               {user && user.displayName}

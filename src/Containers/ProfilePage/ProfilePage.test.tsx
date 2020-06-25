@@ -22,7 +22,7 @@ describe('test the profile page load', () => {
   })
   
   it('Should display the displayName', () => {
-    const { queryByText } = render(<ProfilePage user={userMocks} />);
+    const { queryByText } = render(<ProfilePage withSpinner={true} user={userMocks} />);
     const display = queryByText('Andrew');
     expect(display).toBeInTheDocument();
   })

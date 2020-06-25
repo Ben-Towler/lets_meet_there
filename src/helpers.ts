@@ -2,8 +2,6 @@ import { pickBy } from 'lodash';
 import {Flight} from 'Interfaces/Flight'
 import { GetPlaceResponse } from 'Interfaces/getPlaceResponse';
 import { PlaceResponse } from 'Interfaces/PlaceResponse';
-import placesReducer from 'Reducers/placesReducer';
-import { Place } from 'Interfaces/Place';
 
 const ArrToDict = (array: [], key: string) => {
   const initialValue = {};

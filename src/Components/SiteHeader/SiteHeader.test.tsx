@@ -13,9 +13,7 @@ describe('Site Header', () => {
   test('snapshot matches', () => {
     const renderer = ShallowRenderer.createRenderer()
     const result = renderer.render(
-      <SiteHeader 
-        user={null} 
-      />
+      <SiteHeader />
     )
     expect(result).toMatchSnapshot()
   });
