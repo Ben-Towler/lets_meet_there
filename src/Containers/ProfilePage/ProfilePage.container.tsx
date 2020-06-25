@@ -1,5 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
+import { useHistory } from 'react-router-dom'
 import { getFavFlights } from 'Services/ApiClient';
 import { Trip, Spinner } from 'Components';
 import { firestore } from 'Services/firebase.utils';
@@ -12,12 +12,13 @@ interface Props {
 }
 
 
-
 export default function ProfilePage({user}: Props): JSX.Element {
   const [isLoading, setIsLoading] = useState(false)
   const [favData, setFavData] = useState<any>();
+  const history = useHistory();
 
   const removeFromFavouritesHandler = async (origin: string, destination: string, outboundDate: string, inboundDate: string) => {
+    
     const filteredData = user.favourites.filter(request => {
       const {userRequest} = request
       if (userRequest.origin === origin && userRequest.destination === destination && userRequest.outboundDate === outboundDate && userRequest.inboundDate === inboundDate) return false
@@ -56,13 +57,14 @@ export default function ProfilePage({user}: Props): JSX.Element {
   }
 
   useEffect(() => {
-    if (user.favourites && user.favourites.length ){ 
+    user || history.push('/')
+    if (user && user.favourites && user.favourites.length ){ 
       favListData().then(data => {
         setIsLoading(false)
         setFavData(data);
       })
     }
-  },[]);
+  },[user]);
 
   return (
     <React.Fragment>
@@ -71,9 +73,10 @@ export default function ProfilePage({user}: Props): JSX.Element {
           ? <Spinner /> 
           : <React.Fragment>
               {user && user.displayName}
-              {user && user.favourites.length ? favData : <p id="noQuotes">You have no quotes favourited</p>}
+              {user && user.favourites && user.favourites.length ? favData : <p id="noQuotes">You have no quotes favourited</p>}
             </React.Fragment>
       }
     </React.Fragment>
   )
 }
+

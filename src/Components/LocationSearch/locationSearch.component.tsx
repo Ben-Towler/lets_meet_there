@@ -24,7 +24,7 @@ export default function LocationSearch({ onChange, name, field }: Props): JSX.El
   
     geocodeByAddress(location)
       .then((results) => { 
-        onChange(field.name, results[0].formatted_address) })
+        onChange(name, results[0].formatted_address) })
       .catch(error => console.log('Error fetching location', error))
  
   };
@@ -73,7 +73,7 @@ export default function LocationSearch({ onChange, name, field }: Props): JSX.El
     <div>
       <PlacesAutocomplete
         value={location} 
-        name={name}
+        // name={name}
         onChange={handleLocationChange}
         onSelect={handleLocationSelect}
         searchOptions={searchOptions}

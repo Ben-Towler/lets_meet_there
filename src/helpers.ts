@@ -82,7 +82,7 @@ export default {
     orderedCollection(filteredSet);
     return orderedCollection(filteredSet);
   },
-  placeId: (res: {Places: GetPlaceResponse[]}, query: string) => {
+  placeId: (res: {Places: GetPlaceResponse[]}  , query: string) => {
     if (res.Places.length === 0) return null;
     if (res.Places.length === 1) return res.Places[0].PlaceId;
     let location = toTitleCase(query);

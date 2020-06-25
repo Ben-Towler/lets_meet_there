@@ -1,4 +1,5 @@
 import {fetchRequest, getFlights, getPlace, getFavFlights} from './ApiClient';
+import {Flight} from 'Interfaces/Flight';
 
 const mocks = {
   query: 'london',
@@ -48,9 +49,18 @@ const mocks = {
 
 }
 
+interface MockPlace {
+  PlaceId: string,
+  PlaceName: string,
+  CountryId: string,
+  RegionId: string,
+  CityId: string,
+  CountryName: string
+}
+
 describe('fetchRequest tests', () => {
   it('should run a fetch request', () => {
-    return fetchRequest('testUrl', {}, mocks.mockFetch).then(data => {
+    return fetchRequest('testUrl', {}, mocks.mockFetch).then((data: {}) => {
       expect(mocks.mockFetch.mock.calls.length).toBe(1);
       expect(mocks.mockFetch).toBeCalledWith('testUrl', {});
     });
@@ -58,7 +68,7 @@ describe('fetchRequest tests', () => {
   })
 
   it('should run the fetch request with the correct URL and options object', () => {
-    return fetchRequest('testUrl', {}, mocks.mockFetch).then(data => {
+    return fetchRequest('testUrl', {}, mocks.mockFetch).then((data: {}) => {
       expect(mocks.mockFetch).toBeCalledWith('testUrl', {});
     });
   })
@@ -69,19 +79,19 @@ describe('fetchRequest tests', () => {
 describe('get places fetch tests', () => {
 
   it('should recieve a list of valid airports', () => {
-    return getPlace(mocks.query ,mocks.mockFetchGetPlace).then(data => {
+    return getPlace(mocks.query ,mocks.mockFetchGetPlace).then((data: {Places: MockPlace[]}) => {
       expect(data.Places.length).toEqual(1);
     })
   })
 
   it('should recieve a valid placeName property', () => {
-    return getPlace(mocks.query ,mocks.mockFetchGetPlace).then(data => {
+    return getPlace(mocks.query ,mocks.mockFetchGetPlace).then((data: {Places: MockPlace[]}) => {
       expect(data.Places[0].PlaceName).toEqual('London');
     })
   })
 
   it('should recieve a valid PlaceId property', () => {
-    return getPlace(mocks.query ,mocks.mockFetchGetPlace).then(data => {
+    return getPlace(mocks.query ,mocks.mockFetchGetPlace).then((data: {Places: MockPlace[]}) => {
       expect(data.Places[0].PlaceId).toEqual('LOND-sky');
     })
   })
@@ -92,13 +102,13 @@ describe('get places fetch tests', () => {
 
 describe('get flights fetch tests', () => {
   it('should should call the inner fetch function', () => {
-    return getFlights(mocks.origin, mocks.outbound, mocks.inbound ,mocks.mockFetchGetFlights).then(data => {
+    return getFlights(mocks.origin, mocks.outbound, mocks.inbound ,mocks.mockFetchGetFlights).then((data: {Quotes: Flight[]}) => {
       expect(mocks.mockFetchGetFlights.mock.calls.length).toBeGreaterThan(0);
     })
   })
 
   it('should have a price/direct and carrierId property', () => {
-    return getFlights(mocks.origin, mocks.outbound, mocks.inbound ,mocks.mockFetchGetFlights).then(data => {
+    return getFlights(mocks.origin, mocks.outbound, mocks.inbound ,mocks.mockFetchGetFlights).then((data: {Quotes: Flight[]}) => {
         expect(data.Quotes[0].MinPrice).toBeDefined();
         expect(data.Quotes[0].Direct).toBeDefined();
         expect(data.Quotes[0].OutboundLeg.CarrierIds.length).toBeGreaterThan(0);

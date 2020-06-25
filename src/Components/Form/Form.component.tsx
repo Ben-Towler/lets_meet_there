@@ -37,9 +37,10 @@ function Form ({showDateRange, onSubmit, hasError, fields}: Props): JSX.Element 
 
   function handleChange (name: string, googleLocation: string) {
     let parsedLoc = googleLocation.split(', ');
-    const fieldsObj: FormData = {...formData};
-    const location = {name: parsedLoc[0]};
     
+    const fieldsObj: FormData = {...formData};
+    let location = {};
+    location[name] = parsedLoc[0];
     
     setFormData({...fieldsObj, ...location});
     isFormValid(formData)
@@ -62,7 +63,6 @@ function Form ({showDateRange, onSubmit, hasError, fields}: Props): JSX.Element 
       const formCriteria: FormData = {
         ...formData,
       }
-      console.log(formCriteria)
 
       if (showDateRange) {
         formCriteria.startDate = formatDate(formDates.startDate);
